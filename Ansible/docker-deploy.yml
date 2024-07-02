@@ -1,0 +1,14 @@
+---
+- hosts: 'server_name'
+  become: true
+  tasks:
+
+    - name: Run Docker Container
+      docker_container:
+        name: w1                          #container name
+        image: rajdandhare/jenimg:latest  #image name from DockerHub
+        ports:
+          - "6400:80"
+        detach: yes
+        restart_policy: always
+

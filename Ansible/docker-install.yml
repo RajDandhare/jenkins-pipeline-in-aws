@@ -1,0 +1,30 @@
+---
+- hosts: 'server_name'
+  become: true
+  tasks:
+    
+    - name: Set up docker repository
+      shell: |
+        dnf install -y yum-utils
+        yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Install the latest version of Docker Engine and containerd
+      dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+      notify: Start and enable docker
+    
+    - name: Start and enable docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes 
+
+  handlers:
+    - name: Start and enable docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes

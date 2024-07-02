@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Log into DockerHub
+    community.docker.docker_login:
+      username: rajdandhare2017@gmail.com     # your Docker Account
+      password: "Password"
+
+  - name: Build docker image
+    docker_image:
+      name: jenimg                            # Name of  image
+      source: build
+      build:
+        path: /git_files/"your_Repo._name"    
+
+  - name: Tag and push to docker hub
+    docker_image:
+      name: jenimg 
+      repository: rajdandhare/jenimg:latest   # tag for DockerHub
+      push: true
+      source: local
+
+  - name: Log out of DockerHub                # Logout form DockerHub
+    community.docker.docker_login:
+      state: absent
