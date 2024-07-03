@@ -48,10 +48,29 @@ Then Click on Open -> Accept and Enter user name 'ec2-user' [for Red Hat instanc
 
 ### **Step 3 :** Installing Ansible, Jenkins, Docker, and Git on AWS
 
-**Ansible Installation :** 
+**Ansible Installation :**
 
     sudo yum update
     sudo dnf install ansible-core wget
+
+We have to edit the hosts file of Ansible to keep track of all nodes.
+
+    sudo vi /etc/ansible/hosts
+
+Now we have to edit ansible.cfg file 
+
+    sudo vi /etc/ansible/ansible.cfg
+
+Append this on last line of the file: 
+
+    [defaults]
+    
+    #inventory = /root/anitest.yml
+    host_key_checking = False
+    #deprecation_warning = False
+    #remote_user = root
+
+Thats it for Ansible Installation!!!
 
 **Jenkins Installation :** 
 
@@ -83,9 +102,6 @@ Next you will be ask for Login which you just signup for Jenkins. It will take y
 ![jenkins-dashboard](/../main/Pics/jenkins-dashboard.png) <br /><br />
 
 Thats it for the Jenkins Installation!!!!
-
-> [!Caution]
-> Now, open new terminal and don't close or stop the terminal where the Jenkins.war file is running.
 
 **Docker Installation :**
 
@@ -119,8 +135,10 @@ How to login in VM using terminal:
 > how to create new repository
 > https://docs.github.com/en/repositories/creating-and-managing-repositories/quickstart-for-repositories
 
-We have to Create two files in that Repo. name 'Dockerfile' and 'index.html', For example you can use files which is avilable in this Repo.<br />
+We have to Create two files in that Repo. name 'Dockerfile', 'index.html', For example you can use files which is avilable in this Repo.<br />
 'Dockerfile' is need for building the images and 'index.html' be our website file.
+
+Now add two Files 'docker-build.yml', 'docker-deploy.yml' on same location. This Files will Build image and deploy container respectively. Use the files which is provided in this Repository.
 
 We need this Repo. in our VM, make directory in '/' name 'git_files' 
 
@@ -139,6 +157,41 @@ Goto Jenkins DashBoard in Browser, Click on 'New item' to create First step of p
 ![jenkins-pipeline-4.png](/../main/Pics/jenkins-pipeline-4.png) <br /><br />
 
 Save it and Go back to DashBoard and click on New item for Second step of pipline.
+
+Now goto github repository and add new file name 'Jenkinsfile'
+
+Belows are the stages/steps of pipeline 
+
+    #Jenkinsfile
+    pipeline{
+        agent any
+        stages {
+            stage('fetch-code'){
+                steps {
+                    sh '''
+                    cd /git-files/jenkins-docker-webpage/
+                    sudo git pull
+                    '''
+                }
+            }
+            stage('build-image'){
+                steps{
+                    sh '''
+                    cd /git-files/jenkins-docker-webpage/
+                    sudo ansible-playbook docker-build.yml
+                    '''
+                }
+            }
+            stage('deploy-image'){
+                steps{
+                    sh '''
+                    cd /git-files/jenkins-docker-webpage/
+                    sudo ansible-playbook docker-deploy.yml
+                    '''
+                }
+            }
+        }
+    }
 
 ### **Step 6 :** Jenkins-Github Webhook.
 
