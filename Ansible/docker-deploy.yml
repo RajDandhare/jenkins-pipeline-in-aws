@@ -10,5 +10,3 @@
         ports:
           - "6400:80"
         detach: yes
-        restart_policy: always
-
