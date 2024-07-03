@@ -1,5 +1,5 @@
 ---
-- hosts: 'server_name'
+- hosts: localhost
   become: true
   tasks:
 
