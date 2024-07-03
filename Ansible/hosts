@@ -53,7 +53,7 @@
 ## blue.example.com
 
 [linux]
-192.168.239.131
+instance's IP Address
 
 [linux:vars]
 ansible_user=root
