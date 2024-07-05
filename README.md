@@ -2,7 +2,7 @@
 
 ## DevOps CICD pipeline [Jenkins Pipeline] 
 
-_This project will show how to run Jenkins on AWS [single instance] and run Docker containers using Ansible with github webhook. [For beginner]_
+_This project will show how to run Jenkins pipeline on AWS [single instance] and run Docker containers using Ansible with github webhook. [For beginner]_
 
 ### **Step 1 :** Creating an Instance on AWS.
 
