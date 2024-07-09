@@ -80,7 +80,7 @@ Thats it for Ansible Installation!!!
    
     # Add required dependencies for the jenkins package
   	sudo yum install fontconfig java-17-openjdk
-  	sudo yum install Jenkins
+  	sudo yum install jenkins
   	sudo systemctl enable Jenkins && sudo systemctl start Jenkins && sudo systemctl status Jenkins
 
 To access the Jenkins webpage which is avilable on port 8080 by default, we need to add port number on inbound rule in security section -> security group -> edit inbound rules
