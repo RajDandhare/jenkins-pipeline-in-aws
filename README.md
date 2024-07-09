@@ -105,7 +105,7 @@ Thats it for the Jenkins Installation!!!!
 
 **Docker Installation :**
 
-    sudo dnf check-update    #update the system it need 
+    sudo dnf check-update    #update the system if need 
     sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
     sudo dnf install docker-ce docker-ce-cli containerd.io
 
