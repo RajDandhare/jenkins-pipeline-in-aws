@@ -12,7 +12,7 @@ On AWS EC2 Dashboard click on Launch Instances and Enter the name for instance. 
 ![aws-instance-create-1.2](/../main/Pics/aws-instance-create-1.2.png) <br /><br />
 
 > [!Note]
-> after creating the key pair save it as '.pem', it will be used as login for instance.
+> select '.pem' format, it will be used as login for instance.
 
 ![aws-instance-create-1.3](/../main/Pics/aws-instance-create-1.3.png) <br /><br />
 ![aws-instance-create-1.4](/../main/Pics/aws-instance-create-1.4.png) <br /><br />
