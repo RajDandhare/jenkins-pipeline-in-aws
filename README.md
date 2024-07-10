@@ -142,8 +142,8 @@ Now add two Files 'docker-build.yml', 'docker-deploy.yml' on same location. This
 
 We need this Repo. in our VM, make directory in '/' name 'git_files' 
 
-    sudo mkdir /git_files
-    cd /git_files
+    sudo mkdir /git-files
+    cd /git-files
     git clone 'URL of your git repo.'
 
 ### **Step 5 :**  Creating Pipeline 
