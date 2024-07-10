@@ -138,13 +138,13 @@ How to login in VM using terminal:
 We have to Create two files in that Repo. name 'Dockerfile', 'index.html', For example you can use files which is avilable in this Repo.<br />
 'Dockerfile' is need for building the images and 'index.html' be our website file.
 
-Now add two Files 'docker-build.yml', 'docker-deploy.yml' on same location. This Files will Build image and deploy container respectively. Use the files which is provided in this Repository.
-
 We need this Repo. in our VM, make directory in '/' name 'git_files' 
 
     sudo mkdir /git-files
     cd /git-files
     git clone 'URL of your git repo.'
+
+Now add two Files 'docker-build.yml', 'docker-deploy.yml' on location '/git-files/'repository_name/'. This Files will Build image and deploy container respectively. Use the files which is provided in this Repository.
 
 ### **Step 5 :**  Creating Pipeline 
 
