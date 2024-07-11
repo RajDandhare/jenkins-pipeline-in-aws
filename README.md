@@ -142,7 +142,7 @@ We need this Repo. in our VM, make directory in '/' name 'git_files'
 
     sudo mkdir /git-files
     cd /git-files
-    git clone 'URL of your git repo.'
+    sudo git clone 'URL of your git repo.'
 
 Now add two Files 'docker-build.yml', 'docker-deploy.yml' on location '/git-files/'repository_name/'. This Files will Build image and deploy container respectively. Use the files which is provided in this Repository.
 
