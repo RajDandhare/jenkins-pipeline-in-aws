@@ -48,29 +48,26 @@ Then Click on Open -> Accept and Enter user name 'ec2-user' [for Red Hat instanc
 
 ### **Step 3 :** Installing Ansible, Jenkins, Docker, and Git on AWS
 
-**Ansible Installation :**
+**Docker Installation :**
 
-    sudo yum update
-    sudo dnf install ansible-core wget
+    sudo dnf check-update    #update the system if need 
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    sudo dnf install docker-ce docker-ce-cli containerd.io wget
 
-We have to edit the hosts file of Ansible to keep track of all nodes.
+To start the docker service, 
 
-    sudo vi /etc/ansible/hosts
+    sudo systemctl start docker
+    sudo systemctl status docker
+    sudo systemctl enable docker    #make sure the service is 'active' after system is restarted/reboot 
 
-Now we have to edit ansible.cfg file 
+You need to have Docker Account to Create your own docker images:-
 
-    sudo vi /etc/ansible/ansible.cfg
+> [!Tip]
+> How to create Docker Account link : https://docs.docker.com/docker-id/
 
-Append this on last line of the file: 
+How to login in VM using terminal:
 
-    [defaults]
-    
-    #inventory = /root/anitest.yml
-    host_key_checking = False
-    #deprecation_warning = False
-    #remote_user = root
-
-Thats it for Ansible Installation!!!
+    sudo docker login --username "your_email_address"    #Enter the password of docker account
 
 **Jenkins Installation :** 
 
@@ -80,7 +77,7 @@ Thats it for Ansible Installation!!!
    
     # Add required dependencies for the jenkins package
   	sudo yum install fontconfig java-17-openjdk
-  	sudo yum install jenkins
+  	sudo yum install jenkins 
   	sudo systemctl enable jenkins && sudo systemctl start jenkins && sudo systemctl status jenkins
 
 To access the Jenkins webpage which is avilable on port 8080 by default, we need to add port number on inbound rule in security section -> security group -> edit inbound rules
@@ -103,32 +100,36 @@ Next you will be ask for Login which you just signup for Jenkins. It will take y
 
 Thats it for the Jenkins Installation!!!!
 
-**Docker Installation :**
-
-    sudo dnf check-update    #update the system if need 
-    sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-    sudo dnf install docker-ce docker-ce-cli containerd.io
-
-To start the docker service, 
-
-    sudo systemctl start docker
-    sudo systemctl status docker
-    sudo systemctl enable docker    #make sure the service is 'active' after system is restarted/reboot 
-
-You need to have Docker Account to Create your own docker images:-
-
-> [!Tip]
-> How to create Docker Account link : https://docs.docker.com/docker-id/
-
-How to login in VM using terminal:
-
-    sudo docker login --username "your_email_address"    #Enter the password of docker account
-
 **Git Installation :**
 
     sudo yum install git 
     sudo git config --global user.email "email_address"
     sudo git config --global user.name "username"
+
+**Ansible Installation :**
+
+    sudo dnf install ansible-core
+    sudo yum install python3 pip 
+    sudo pip ansible
+
+We have to edit the hosts file of Ansible to keep track of all nodes.
+
+    sudo vi /etc/ansible/hosts
+
+Now we have to edit ansible.cfg file 
+
+    sudo vi /etc/ansible/ansible.cfg
+
+Append this on last line of the file: 
+
+    [defaults]
+    
+    #inventory = /root/anitest.yml
+    host_key_checking = False
+    #deprecation_warning = False
+    #remote_user = root
+
+Thats it for Ansible Installation!!!
 
 ### **Step 4 :** Create a repositorie in GitHub
 
