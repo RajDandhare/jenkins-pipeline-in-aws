@@ -11,7 +11,7 @@
       name: jenimg                            # Name of  image
       source: build
       build:
-        path: /git_files/"your_Repo._name"    
+        path: /git-files/"your_Repo._name"/
 
   - name: Tag and push to docker hub
     docker_image:
