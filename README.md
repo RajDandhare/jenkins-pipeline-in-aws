@@ -6,6 +6,10 @@ _This project will show how to run Jenkins pipeline on AWS [single instance] and
 
 ### **Step 1 :** Creating an Instance on AWS.
 
+[Amazon Elastic Compute Cloud](https://aws.amazon.com/what-is/cloud-instances/) is a part of Amazon.com's cloud-computing platform, Amazon Web Services, that allows users to rent virtual computers on which to run their own computer applications.
+
+Amazon Web Service [EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html) (Amazon Elastic Compute Cloud), one of Amazon Web Services' most well-known services, offers businesses the ability to run applications on the public cloud. An EC2 instance is simply a virtual server in Amazon Web Services terminology.
+
 On AWS EC2 Dashboard click on Launch Instances and Enter the name for instance. Then Select Redhat for Quick Start and Create Key pair, as per shown in Below Figures.
 
 ![aws-instance-create-1.1](/../main/Pics/aws-instance-create-1.1.png) <br /><br />
@@ -18,11 +22,11 @@ On AWS EC2 Dashboard click on Launch Instances and Enter the name for instance. 
 ![aws-instance-create-1.4](/../main/Pics/aws-instance-create-1.4.png) <br /><br />
 ![aws-instance-create-1.5](/../main/Pics/aws-instance-create-1.5.png) <br /><br />
 
-### **Step 2 :** Login to the Instance we just created.
+### **Step 2 :** Login to EC2 Instance.
 
 You Need Putty and Puttygen for login for the instance that we just created.
 
-> download link for putti : https://www.putty.org/
+> download link for putti : [Click](https://www.putty.org/)
 
 After download and installatioin is complete open puttygen we need to convert '.pem' key into '.ppk'
 
@@ -46,9 +50,13 @@ Then Click on Open -> Accept and Enter user name 'ec2-user' [for Red Hat instanc
 > [!Note]
 > .ppk and .pem are two commonly used file formats for storing public and private keys for secure communication. While .ppk files are specific to PuTTY and use a proprietary format, .pem files use the widely used ASCII text format and can be used to store various types of keys. Despite their differences, both formats serve the same purpose and can be used interchangeably in various cryptographic applications.
 
-### **Step 3 :** Installing Ansible, Jenkins, Docker, and Git on AWS
+### **Step 3 :** Installing Docker, Jenkins, Git and Ansible on AWS
 
 **Docker Installation :**
+
+> [!Note]
+> [Docker](https://docs.docker.com/guides/docker-overview/) is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. <br />
+> In this Project we will user docker container to deploy our website.
 
     sudo dnf check-update    #update the system if need 
     sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -63,13 +71,16 @@ To start the docker service,
 You need to have Docker Account to Create your own docker images:-
 
 > [!Tip]
-> How to create Docker Account link : https://docs.docker.com/docker-id/
+> [How to create Docker Account](https://docs.docker.com/docker-id/)
 
 How to login in VM using terminal:
 
     sudo docker login --username "your_email_address"    #Enter the password of docker account
 
 **Jenkins Installation :** 
+
+> [!Note]
+> [Jenkins](https://en.wikipedia.org/wiki/Jenkins_(software)) is an open source automation server. It helps automate the parts of software development related to building, testing, and deploying, facilitating continuous integration, and continuous delivery.
 
     sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
     sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
@@ -102,11 +113,17 @@ Thats it for the Jenkins Installation!!!!
 
 **Git Installation :**
 
+> [!Note]
+> [Git](https://git-scm.com/) is a distributed version control system that tracks versions of files. It is often used to control source code by programmers collaboratively developing software.
+
     sudo yum install git 
     sudo git config --global user.email "email_address"
     sudo git config --global user.name "username"
 
 **Ansible Installation :**
+
+>[!Note]
+> [Ansible](https://www.ansible.com/) is a suite of software tools that enables infrastructure as code. It is open-source and the suite includes software provisioning, configuration management, and application deployment functionality.
 
     sudo dnf install ansible-core
     sudo yum install python3 pip 
@@ -148,6 +165,9 @@ We need this Repo. in our VM, make directory in '/' name 'git_files'
 Now add two Files 'docker-build.yml', 'docker-deploy.yml' on location '/git-files/'repository_name/'. This Files will Build image and deploy container respectively. Use the files which is provided in this Repository.
 
 ### **Step 5 :**  Creating Pipeline 
+
+> [!Note]
+> In software engineering, [CI/CD](https://www.redhat.com/en/topics/devops/what-is-ci-cd) or [CICD pipeline](https://www.redhat.com/en/topics/devops/what-cicd-pipeline) is the combined practices of continuous integration and continuous delivery or, less often, continuous deployment. They are sometimes referred to collectively as continuous development or continuous software development.
 
 Goto Jenkins DashBoard in Browser, Click on 'New item' to create First step of pipeline.
 <br />Select Pipeline, Name the project 'aws-pipeline'. <br />Then do the same as shown in below figures:-
@@ -196,8 +216,10 @@ Belows are the stages/steps of pipeline
 
 ### **Step 6 :** Jenkins-Github Webhook.
 
-First you need to Create token from GitHub
-> https://docs.github.com/en/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token
+> [!Note]
+> [Webhooks](https://docs.github.com/en/webhooks/about-webhooks) let you subscribe to events happening in a software system and automatically receive a delivery of data to your server whenever those events occur.
+
+First you need to [Create token](https://docs.github.com/en/enterprise-server@3.9/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token) from GitHub
 
 In Jenkins : Goto Manage Jenkins -> System Config. -> search for GitHub, click on add Credentials, and then select the Credential that we just created as shown in figure below.
 
