@@ -65,9 +65,9 @@ Then Click on Open -> Accept and Enter user name 'ec2-user' [for Red Hat instanc
 To start the docker service, 
 
     sudo systemctl start docker
-    sudo systemctl status docker
     sudo systemctl enable docker    #make sure the service is 'active' after system is restarted/reboot 
-
+    sudo systemctl status docker
+    
 You need to have Docker Account to Create your own docker images:-
 
 > [!Tip]
