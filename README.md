@@ -127,7 +127,7 @@ Thats it for the Jenkins Installation!!!!
 
     sudo dnf install ansible-core
     sudo yum install python3 pip 
-    sudo pip ansible
+    sudo pip install ansible
 
 We have to edit the hosts file of Ansible to keep track of all nodes.
 
